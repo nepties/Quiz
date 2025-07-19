@@ -1,0 +1,173 @@
+[
+  {
+    "id": "2",
+    "title": "하스스톤 확장팩 이름 맞추기",
+    "description": "하스스톤의 모든 확장팩 이름을 맞춰보세요",
+    "category": "게임",
+    "timeLimit": 600,
+    "answers": [
+      {
+        "answer": "낙스라마스의 저주",
+        "synonyms": ["낙스라마스의 저주"],
+        "isCorrect": true
+      },
+      {
+        "answer": "고블린 대 노움",
+        "synonyms": ["고블린 대 노움"],
+        "isCorrect": true
+      },
+      {
+        "answer": "검은바위 산",
+        "synonyms": ["검은바위 산"],
+        "isCorrect": true
+      },
+      {
+        "answer": "대 마상시합",
+        "synonyms": ["대 마상시합"],
+        "isCorrect": true
+      },
+      {
+        "answer": "탐험가 연맹",
+        "synonyms": ["탐험가 연맹"],
+        "isCorrect": true
+      },
+      {
+        "answer": "고대 신의 속삭임",
+        "synonyms": ["고대 신의 속삭임"],
+        "isCorrect": true
+      },
+      {
+        "answer": "한여름 밤의 카라잔",
+        "synonyms": ["한여름 밤의 카라잔"],
+        "isCorrect": true
+      },
+      {
+        "answer": "비열한 거리의 가젯잔",
+        "synonyms": ["비열한 거리의 가젯잔"],
+        "isCorrect": true
+      },
+      {
+        "answer": "운고로를 향한 여정",
+        "synonyms": ["운고로를 향한 여정"],
+        "isCorrect": true
+      },
+      {
+        "answer": "얼어붙은 왕좌의 기사들",
+        "synonyms": ["얼어붙은 왕좌의 기사들"],
+        "isCorrect": true
+      },
+      {
+        "answer": "코볼트와 지하 미궁",
+        "synonyms": ["코볼트와 지하 미궁"],
+        "isCorrect": true
+      },
+      { "answer": "마녀숲", "synonyms": ["마녀숲"], "isCorrect": true },
+      {
+        "answer": "박사 붐의 폭심만만 프로젝트",
+        "synonyms": ["박사 붐의 폭심만만 프로젝트"],
+        "isCorrect": true
+      },
+      {
+        "answer": "라스타칸의 대난투",
+        "synonyms": ["라스타칸의 대난투"],
+        "isCorrect": true
+      },
+      {
+        "answer": "어둠의 반격",
+        "synonyms": ["어둠의 반격"],
+        "isCorrect": true
+      },
+      {
+        "answer": "울둠의 구원자",
+        "synonyms": ["울둠의 구원자"],
+        "isCorrect": true
+      },
+      {
+        "answer": "용의 강림",
+        "synonyms": ["용의 강림"],
+        "isCorrect": true
+      },
+      {
+        "answer": "황폐한 아웃랜드",
+        "synonyms": ["황폐한 아웃랜드"],
+        "isCorrect": true
+      },
+      {
+        "answer": "스칼로맨스 아카데미",
+        "synonyms": ["스칼로맨스 아카데미"],
+        "isCorrect": true
+      },
+      {
+        "answer": "광기의 다크문 축제",
+        "synonyms": ["광기의 다크문 축제"],
+        "isCorrect": true
+      },
+      {
+        "answer": "불모의 땅",
+        "synonyms": ["불모의 땅"],
+        "isCorrect": true
+      },
+      {
+        "answer": "스톰윈드",
+        "synonyms": ["스톰윈드"],
+        "isCorrect": true
+      },
+      {
+        "answer": "알테락 계곡",
+        "synonyms": ["알테락 계곡"],
+        "isCorrect": true
+      },
+      {
+        "answer": "가라앉은 도시로의 항해",
+        "synonyms": ["가라앉은 도시로의 항해"],
+        "isCorrect": true
+      },
+      {
+        "answer": "나스리아 성채 살인 사건",
+        "synonyms": ["나스리아 성채 살인 사건"],
+        "isCorrect": true
+      },
+      {
+        "answer": "리치 왕의 진군",
+        "synonyms": ["리치 왕의 진군"],
+        "isCorrect": true
+      },
+      {
+        "answer": "전설노래자랑",
+        "synonyms": ["전설노래자랑"],
+        "isCorrect": true
+      },
+      { "answer": "티탄", "synonyms": ["티탄"], "isCorrect": true },
+      {
+        "answer": "황야의 땅 결투",
+        "synonyms": ["황야의 땅 결투"],
+        "isCorrect": true
+      },
+      {
+        "answer": "위즈뱅의 장난감 공방",
+        "synonyms": ["위즈뱅의 장난감 공방"],
+        "isCorrect": true
+      },
+      {
+        "answer": "극한의 극락",
+        "synonyms": ["극한의 극락"],
+        "isCorrect": true
+      },
+      {
+        "answer": "끝없는 어둠",
+        "synonyms": ["끝없는 어둠"],
+        "isCorrect": true
+      },
+      {
+        "answer": "에메랄드의 꿈 속으로",
+        "synonyms": ["에메랄드의 꿈 속으로"],
+        "isCorrect": true
+      },
+      {
+        "answer": "운고로의 잃어버린 도시",
+        "synonyms": ["운고로의 잃어버린 도시"],
+        "isCorrect": true
+      }
+    ]
+  }
+]
