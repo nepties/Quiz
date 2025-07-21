@@ -3,6 +3,7 @@
     "id": "1",
     "title": "NFL 팀 이름 맞추기",
     "description": "NFL 32개 팀의 이름을 맞춰보세요",
+    "type": "fill-in-blank",
     "category": "스포츠",
     "timeLimit": 600,
     "answers": [

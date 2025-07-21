@@ -1,0 +1,88 @@
+{
+  "id": "history-quiz",
+  "title": "한국사 기초",
+  "description": "한국사의 주요 사건과 인물에 대한 퀴즈",
+  "type": "multiple-choice",
+  "category": "역사",
+  "timeLimit": 120,
+  "answers": [],
+  "questions": [
+    {
+      "id": "q1",
+      "question": "고구려를 건국한 인물은?",
+      "options": ["주몽", "온조", "박혁거세", "김수로"],
+      "correctAnswer": 0
+    },
+    {
+      "id": "q2",
+      "question": "조선 건국의 주역이며 조선의 태조는?",
+      "options": ["정도전", "이성계", "최영", "이방원"],
+      "correctAnswer": 1
+    },
+    {
+      "id": "q3",
+      "question": "임진왜란이 일어난 연도는?",
+      "options": ["1592년", "1593년", "1597년", "1598년"],
+      "correctAnswer": 0
+    },
+    {
+      "id": "q4",
+      "question": "세종대왕이 만든 것으로 유명한 것은?",
+      "options": ["거북선", "한글", "측우기", "팔만대장경"],
+      "correctAnswer": 1
+    },
+    {
+      "id": "q5",
+      "question": "일제강점기의 시작 연도는?",
+      "options": ["1905년", "1910년", "1919년", "1945년"],
+      "correctAnswer": 1
+    },
+    {
+      "id": "q6",
+      "question": "3·1 운동이 일어난 연도는?",
+      "options": ["1918년", "1919년", "1920년", "1921년"],
+      "correctAnswer": 1
+    },
+    {
+      "id": "q7",
+      "question": "고려 시대의 대표적인 불교 문화재는?",
+      "options": ["석굴암", "팔만대장경", "불국사", "첨성대"],
+      "correctAnswer": 1
+    },
+    {
+      "id": "q8",
+      "question": "조선 후기 실학자가 아닌 인물은?",
+      "options": ["박지원", "정약용", "김정호", "최치원"],
+      "correctAnswer": 3
+    },
+    {
+      "id": "q9",
+      "question": "한국전쟁이 발발한 날짜는?",
+      "options": [
+        "1950년 6월 15일",
+        "1950년 6월 25일",
+        "1950년 7월 25일",
+        "1950년 8월 15일"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "id": "q10",
+      "question": "통일신라의 수도는?",
+      "options": ["평양", "개성", "경주", "한양"],
+      "correctAnswer": 2
+    },
+    {
+      "id": "q11",
+      "question": "조선시대 과거제도에서 최고 단계는?",
+      "options": ["소과", "대과", "생원시", "진사시"],
+      "correctAnswer": 1
+    },
+    {
+      "id": "q12",
+      "question": "고려의 수도는?",
+      "options": ["한양", "경주", "개성", "평양"],
+      "correctAnswer": 2
+    }
+  ]
+}

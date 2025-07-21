@@ -2,10 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { useQuizStore } from "@/store/quizStore";
+import { Quiz } from "@/types/quiz";
 import QuizCard from "@/components/QuizCard";
 import QuizGame from "@/components/QuizGame";
+import MultipleChoiceQuiz from "@/components/MultipleChoiceQuiz";
 import nflQuizData from "@/data/nfl-quiz.json";
 import hearthstoneQuizData from "@/data/hearthstone-quiz.json";
+import historyQuizData from "@/data/history-quiz.json";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -14,7 +17,7 @@ export default function Home() {
 
   useEffect(() => {
     setMounted(true);
-    const allQuizzes = [...nflQuizData, ...hearthstoneQuizData];
+    const allQuizzes = [...nflQuizData, ...hearthstoneQuizData, historyQuizData] as Quiz[];
     setAvailableQuizzes(allQuizzes);
   }, [setAvailableQuizzes]);
 
@@ -23,7 +26,11 @@ export default function Home() {
   }
 
   if (currentQuiz) {
-    return <QuizGame />;
+    if (currentQuiz.type === "multiple-choice") {
+      return <MultipleChoiceQuiz />;
+    } else {
+      return <QuizGame />;
+    }
   }
 
   return (

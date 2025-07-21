@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useQuizStore } from "@/store/quizStore";
 import { QuizSession } from "@/types/quiz";
+import { ArrowPathIcon, HomeIcon } from "@heroicons/react/24/solid";
 
 export default function QuizGame() {
   const [inputValue, setInputValue] = useState("");
@@ -143,9 +144,10 @@ export default function QuizGame() {
           <div className="flex items-center space-x-4">
             <button
               onClick={resetQuiz}
-              className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded font-bold"
+              className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded font-bold flex items-center gap-2"
             >
-              ← 메인으로
+              <HomeIcon className="w-4 h-4" />
+              메인으로
             </button>
             <h1 className="text-2xl font-bold text-gray-800">
               {currentQuiz.title}
@@ -174,8 +176,9 @@ export default function QuizGame() {
                   ) : currentSession.isCompleted ? (
                     <button
                       onClick={handleRestart}
-                      className="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-base font-bold h-10"
+                      className="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-base font-bold h-10 flex items-center justify-center gap-2"
                     >
+                      <ArrowPathIcon className="w-5 h-5" />
                       다시하기
                     </button>
                   ) : (

@@ -3,6 +3,7 @@
     "id": "2",
     "title": "하스스톤 확장팩 이름 맞추기",
     "description": "하스스톤의 모든 확장팩 이름을 맞춰보세요",
+    "type": "fill-in-blank",
     "category": "게임",
     "timeLimit": 600,
     "answers": [
