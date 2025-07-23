@@ -16,6 +16,8 @@ export default function QuizCard({ quiz, onStart }: QuizCardProps) {
         return "객관식";
       case "fill-in-blank":
         return "빈칸 맞추기";
+      case "multiple-select":
+        return "다지선다";
       default:
         return "퀴즈";
     }

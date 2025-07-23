@@ -6,9 +6,11 @@ import { Quiz } from "@/types/quiz";
 import QuizCard from "@/components/QuizCard";
 import QuizGame from "@/components/QuizGame";
 import MultipleChoiceQuiz from "@/components/MultipleChoiceQuiz";
+import MultipleSelectQuiz from "@/components/MultipleSelectQuiz";
 import nflQuizData from "@/data/nfl-quiz.json";
 import hearthstoneQuizData from "@/data/hearthstone-quiz.json";
 import historyQuizData from "@/data/history-quiz.json";
+import animalsQuizData from "@/data/animals-quiz.json";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -17,7 +19,7 @@ export default function Home() {
 
   useEffect(() => {
     setMounted(true);
-    const allQuizzes = [...nflQuizData, ...hearthstoneQuizData, historyQuizData] as Quiz[];
+    const allQuizzes = [...nflQuizData, ...hearthstoneQuizData, historyQuizData, animalsQuizData] as Quiz[];
     setAvailableQuizzes(allQuizzes);
   }, [setAvailableQuizzes]);
 
@@ -28,6 +30,8 @@ export default function Home() {
   if (currentQuiz) {
     if (currentQuiz.type === "multiple-choice") {
       return <MultipleChoiceQuiz />;
+    } else if (currentQuiz.type === "multiple-select") {
+      return <MultipleSelectQuiz />;
     } else {
       return <QuizGame />;
     }

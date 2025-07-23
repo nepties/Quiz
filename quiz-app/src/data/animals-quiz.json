@@ -1,0 +1,33 @@
+{
+  "id": "animals-quiz",
+  "title": "동물 분류",
+  "description": "포유류에 해당하는 동물들을 모두 선택하세요",
+  "type": "multiple-select",
+  "category": "생물",
+  "timeLimit": 60,
+  "answers": [],
+  "selectQuestion": {
+    "id": "mammals",
+    "question": "다음 중 포유류에 해당하는 동물들을 모두 선택하세요",
+    "options": [
+      "고래",
+      "독수리",
+      "펭귄",
+      "코끼리",
+      "상어",
+      "돌고래",
+      "거북이",
+      "호랑이",
+      "뱀",
+      "박쥐",
+      "악어",
+      "사자",
+      "금붕어",
+      "토끼",
+      "개구리",
+      "원숭이"
+    ],
+    "correctAnswers": [0, 3, 5, 7, 9, 11, 13, 15],
+    "maxSelections": 8
+  }
+}
