@@ -1,5 +1,19 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Quiz Application
+
+다양한 유형의 퀴즈를 즐길 수 있는 웹 애플리케이션입니다.
+
+### Features
+
+- **빈칸 맞추기**: 텍스트 입력으로 답안 작성
+- **객관식**: 4개 선택지 중 1개 정답 선택
+- **다지선다**: 여러 정답을 동시에 선택
+
+### Database
+
+이 프로젝트는 **Google Firebase Firestore**를 사용하여 퀴즈 데이터를 저장합니다. Firebase 연결이 실패할 경우 로컬 JSON 파일을 백업으로 사용합니다.
+
 ## Getting Started
 
 First, run the development server:
