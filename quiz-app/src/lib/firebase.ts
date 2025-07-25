@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 // Firebase 구성 정보 검증
 const requiredEnvs = {
@@ -44,5 +45,11 @@ try {
 
 // Firestore 데이터베이스 인스턴스
 export const db = getFirestore(app);
+
+// Authentication 인스턴스
+export const auth = getAuth(app);
+
+// Google 인증 제공자
+export const googleProvider = new GoogleAuthProvider();
 
 export default app;

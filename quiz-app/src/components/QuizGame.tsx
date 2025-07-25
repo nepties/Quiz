@@ -2,6 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import { useQuizStore } from "@/store/quizStore";
 import { QuizSession } from "@/types/quiz";
 import { ArrowPathIcon, HomeIcon } from "@heroicons/react/24/solid";
+import QuizStats from "./QuizStats";
+import { useAuth } from "@/contexts/AuthContext";
+import { StatsService } from "@/services/statsService";
 
 export default function QuizGame() {
   const [inputValue, setInputValue] = useState("");
@@ -10,6 +13,8 @@ export default function QuizGame() {
   const isComposingRef = useRef(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { user } = useAuth();
+  const [statsRefreshTrigger, setStatsRefreshTrigger] = useState(0);
 
   const {
     currentSession,
@@ -43,6 +48,39 @@ export default function QuizGame() {
       return () => clearInterval(timer);
     }
   }, [currentQuiz, currentSession?.isCompleted, endQuiz, isGameStarted]);
+
+  // 게임 완료 시 기록 저장
+  useEffect(() => {
+    const saveGameRecord = async () => {
+      if (
+        user &&
+        currentQuiz &&
+        currentSession &&
+        currentSession.isCompleted &&
+        currentSession.endTime
+      ) {
+        try {
+          await StatsService.saveGameRecord({
+            userId: user.uid,
+            quizId: currentQuiz.id,
+            quizTitle: currentQuiz.title,
+            score: currentSession.score,
+            maxScore: currentQuiz.answers.length,
+            timeSpent: Math.floor((currentSession.endTime - currentSession.startTime) / 1000),
+            quizType: currentQuiz.type,
+            completedAt: currentSession.endTime
+          });
+          console.log('게임 기록 저장 완료');
+          // 통계 새로고침 트리거
+          setStatsRefreshTrigger(prev => prev + 1);
+        } catch (error) {
+          console.error('게임 기록 저장 실패:', error);
+        }
+      }
+    };
+
+    saveGameRecord();
+  }, [user, currentQuiz, currentSession?.isCompleted, currentSession?.endTime]);
 
   // 컴포넌트 언마운트 시 타이머 정리
   useEffect(() => {
@@ -256,6 +294,13 @@ export default function QuizGame() {
               })}
             </div>
           </div>
+
+          {/* 통계 표시 */}
+          <QuizStats 
+            quizId={currentQuiz.id} 
+            quizTitle={currentQuiz.title} 
+            refreshTrigger={statsRefreshTrigger}
+          />
         </div>
       </div>
     </div>

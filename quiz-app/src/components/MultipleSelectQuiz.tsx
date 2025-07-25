@@ -2,6 +2,9 @@ import { useState, useEffect, useCallback } from "react";
 import { useQuizStore } from "@/store/quizStore";
 import { MultipleSelectQuestion } from "@/types/quiz";
 import { ArrowPathIcon, HomeIcon } from "@heroicons/react/24/solid";
+import QuizStats from "./QuizStats";
+import { useAuth } from "@/contexts/AuthContext";
+import { StatsService } from "@/services/statsService";
 
 export default function MultipleSelectQuiz() {
   const [timeLeft, setTimeLeft] = useState(0);
@@ -16,6 +19,9 @@ export default function MultipleSelectQuiz() {
     startGame,
     resetQuiz,
   } = useQuizStore();
+
+  const { user } = useAuth();
+  const [statsRefreshTrigger, setStatsRefreshTrigger] = useState(0);
 
   const selectQuestion = currentQuiz?.selectQuestion;
   const maxSelections = selectQuestion?.maxSelections || 0;
@@ -93,6 +99,40 @@ export default function MultipleSelectQuiz() {
     isGameStarted,
     handleQuizComplete,
   ]);
+
+  // 게임 완료 시 기록 저장
+  useEffect(() => {
+    const saveGameRecord = async () => {
+      if (
+        user &&
+        currentQuiz &&
+        currentSession &&
+        currentSession.isCompleted &&
+        currentSession.endTime &&
+        selectQuestion
+      ) {
+        try {
+          await StatsService.saveGameRecord({
+            userId: user.uid,
+            quizId: currentQuiz.id,
+            quizTitle: currentQuiz.title,
+            score: currentSession.score,
+            maxScore: selectQuestion.correctAnswers.length,
+            timeSpent: Math.floor((currentSession.endTime - currentSession.startTime) / 1000),
+            quizType: currentQuiz.type,
+            completedAt: currentSession.endTime
+          });
+          console.log('게임 기록 저장 완료');
+          // 통계 새로고침 트리거
+          setStatsRefreshTrigger(prev => prev + 1);
+        } catch (error) {
+          console.error('게임 기록 저장 실패:', error);
+        }
+      }
+    };
+
+    saveGameRecord();
+  }, [user, currentQuiz, currentSession?.isCompleted, currentSession?.endTime, selectQuestion]);
 
   // 최대 선택 개수에 도달하면 자동으로 완료 처리
   useEffect(() => {
@@ -337,6 +377,13 @@ export default function MultipleSelectQuiz() {
             </div>
           )}
         </div>
+
+        {/* 통계 표시 */}
+        <QuizStats 
+          quizId={currentQuiz.id} 
+          quizTitle={currentQuiz.title} 
+          refreshTrigger={statsRefreshTrigger}
+        />
       </div>
     </div>
   );

@@ -52,3 +52,32 @@ export interface QuizSession {
   startTime: number;
   endTime?: number;
 }
+
+export interface UserGameRecord {
+  id: string;
+  userId: string;
+  quizId: string;
+  quizTitle: string;
+  score: number;
+  maxScore: number;
+  completedAt: number;
+  timeSpent: number; // 소요 시간 (초)
+  quizType: QuizType;
+}
+
+export interface UserStats {
+  userId: string;
+  totalGames: number;
+  bestScores: { [quizId: string]: number }; // 퀴즈별 최고 점수
+  playCount: { [quizId: string]: number }; // 퀴즈별 플레이 횟수
+  totalScore: number;
+  averageScore: number;
+}
+
+export interface QuizStats {
+  quizId: string;
+  totalPlays: number;
+  averageScore: number;
+  bestScore: number;
+  totalScore: number;
+}

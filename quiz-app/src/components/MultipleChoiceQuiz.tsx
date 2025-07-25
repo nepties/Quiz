@@ -2,6 +2,9 @@ import { useState, useEffect, useCallback } from "react";
 import { useQuizStore } from "@/store/quizStore";
 import { MultipleChoiceQuestion, MultipleChoiceAnswer } from "@/types/quiz";
 import { ArrowPathIcon, ChevronLeftIcon, ChevronRightIcon, HomeIcon } from "@heroicons/react/24/solid";
+import QuizStats from "./QuizStats";
+import { useAuth } from "@/contexts/AuthContext";
+import { StatsService } from "@/services/statsService";
 
 export default function MultipleChoiceQuiz() {
   const [timeLeft, setTimeLeft] = useState(0);
@@ -21,6 +24,9 @@ export default function MultipleChoiceQuiz() {
     endQuiz,
     resetQuiz,
   } = useQuizStore();
+
+  const { user } = useAuth();
+  const [statsRefreshTrigger, setStatsRefreshTrigger] = useState(0);
 
   const questions = currentQuiz?.questions || [];
   const currentQuestion = questions[currentQuestionIndex];
@@ -89,6 +95,39 @@ export default function MultipleChoiceQuiz() {
       return () => clearInterval(timer);
     }
   }, [currentQuiz, currentSession?.isCompleted, isGameStarted, handleQuizComplete]);
+
+  // 게임 완료 시 기록 저장
+  useEffect(() => {
+    const saveGameRecord = async () => {
+      if (
+        user &&
+        currentQuiz &&
+        currentSession &&
+        currentSession.isCompleted &&
+        currentSession.endTime
+      ) {
+        try {
+          await StatsService.saveGameRecord({
+            userId: user.uid,
+            quizId: currentQuiz.id,
+            quizTitle: currentQuiz.title,
+            score: currentSession.score,
+            maxScore: totalQuestions,
+            timeSpent: Math.floor((currentSession.endTime - currentSession.startTime) / 1000),
+            quizType: currentQuiz.type,
+            completedAt: currentSession.endTime
+          });
+          console.log('게임 기록 저장 완료');
+          // 통계 새로고침 트리거
+          setStatsRefreshTrigger(prev => prev + 1);
+        } catch (error) {
+          console.error('게임 기록 저장 실패:', error);
+        }
+      }
+    };
+
+    saveGameRecord();
+  }, [user, currentQuiz, currentSession?.isCompleted, currentSession?.endTime, totalQuestions]);
 
   // 다음 미답변 문제를 찾는 함수
   const findNextUnansweredQuestion = (
@@ -548,6 +587,13 @@ export default function MultipleChoiceQuiz() {
             </div>
           )}
         </div>
+
+        {/* 통계 표시 */}
+        <QuizStats 
+          quizId={currentQuiz.id} 
+          quizTitle={currentQuiz.title} 
+          refreshTrigger={statsRefreshTrigger}
+        />
       </div>
     </div>
   );
