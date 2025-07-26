@@ -3,6 +3,9 @@ import { useQuizStore } from "@/store/quizStore";
 import { QuizSession } from "@/types/quiz";
 import { ArrowPathIcon, HomeIcon } from "@heroicons/react/24/solid";
 import QuizStats from "./QuizStats";
+import QuizControls from "./QuizControls";
+import AverageComparison from "./AverageComparison";
+import LoginButton from "./LoginButton";
 import { useAuth } from "@/contexts/AuthContext";
 import { StatsService } from "@/services/statsService";
 
@@ -148,6 +151,7 @@ export default function QuizGame() {
 
   const handleRestart = () => {
     setInputValue("");
+    
     const session: QuizSession = {
       score: 0,
       isCompleted: false,
@@ -191,6 +195,7 @@ export default function QuizGame() {
               {currentQuiz.title}
             </h1>
           </div>
+          <LoginButton />
         </div>
       </div>
 
@@ -200,72 +205,38 @@ export default function QuizGame() {
           {/* Combined Input and Answers Section */}
           <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-200 w-full max-w-4xl">
             {/* Input Section */}
-            <div className="mb-12">
-              <div className="flex items-center gap-4">
-                {/* 입력 영역 / 시작 버튼 / 다시하기 버튼 */}
-                <div className="w-1/2 relative">
-                  {!isGameStarted ? (
-                    <button
-                      onClick={startGame}
-                      className="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-base font-bold h-10"
-                    >
-                      시작하기
-                    </button>
-                  ) : currentSession.isCompleted ? (
-                    <button
-                      onClick={handleRestart}
-                      className="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-base font-bold h-10 flex items-center justify-center gap-2"
-                    >
-                      <ArrowPathIcon className="w-5 h-5" />
-                      다시하기
-                    </button>
-                  ) : (
-                    <input
-                      ref={inputRef}
-                      type="text"
-                      value={inputValue}
-                      onChange={handleInputChange}
-                      onCompositionStart={handleCompositionStart}
-                      onCompositionEnd={handleCompositionEnd}
-                      placeholder="답을 입력하세요..."
-                      className="w-full px-3 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-base text-gray-800 h-10"
-                      autoComplete="off"
-                      autoFocus
-                      key={foundAnswers.length}
-                    />
-                  )}
-                </div>
-
-                {/* 여백 */}
-                <div className="flex-1"></div>
-
-                {/* 점수와 시간 */}
-                <div className="flex items-center space-x-6">
-                  <div className="text-center">
-                    <div className="text-xs text-gray-500">점수</div>
-                    <div className="text-lg font-bold text-gray-800">
-                      {currentSession.score} / {currentQuiz.answers.length}
-                    </div>
-                  </div>
-
-                  <div className="text-center relative">
-                    <div className="text-xs text-gray-500">시간</div>
-                    <div className="text-lg font-bold font-mono text-gray-800">
-                      {minutes.toString().padStart(2, "0")}:
-                      {seconds.toString().padStart(2, "0")}
-                    </div>
-                    {isGameStarted && !currentSession.isCompleted && (
-                      <button
-                        onClick={handleEndQuiz}
-                        className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 text-xs text-red-500 hover:text-red-700 underline whitespace-nowrap"
-                      >
-                        포기하기
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
+            <QuizControls
+              isGameStarted={isGameStarted}
+              isCompleted={currentSession.isCompleted}
+              currentScore={currentSession.score}
+              totalScore={currentQuiz.answers.length}
+              timeLeft={displayTimeLeft}
+              onStart={startGame}
+              onRestart={handleRestart}
+              onEndQuiz={handleEndQuiz}
+              showEndButton={true}
+            >
+              <input
+                ref={inputRef}
+                type="text"
+                value={inputValue}
+                onChange={handleInputChange}
+                onCompositionStart={handleCompositionStart}
+                onCompositionEnd={handleCompositionEnd}
+                placeholder="답을 입력하세요..."
+                className="w-full px-3 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-base text-gray-800 h-10"
+                autoComplete="off"
+                autoFocus
+                key={foundAnswers.length}
+              />
+            </QuizControls>
+            
+            <AverageComparison
+              quizId={currentQuiz.id}
+              isCompleted={currentSession.isCompleted}
+              currentScore={currentSession.score}
+              totalScore={currentQuiz.answers.length}
+            />
 
             {/* Answers Grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
@@ -296,11 +267,13 @@ export default function QuizGame() {
           </div>
 
           {/* 통계 표시 */}
-          <QuizStats 
-            quizId={currentQuiz.id} 
-            quizTitle={currentQuiz.title} 
-            refreshTrigger={statsRefreshTrigger}
-          />
+          <div className="w-full max-w-4xl">
+            <QuizStats 
+              quizId={currentQuiz.id} 
+              quizTitle={currentQuiz.title} 
+              refreshTrigger={statsRefreshTrigger}
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -61,12 +61,13 @@ export default function Home() {
       {/* Header */}
       <div className="bg-white border-b border-gray-200 px-6 py-8 shadow-sm">
         <div className="max-w-6xl mx-auto">
-          <div className="flex justify-between items-center">
-            <div className="text-center flex-1">
+          <div className="flex items-center">
+            <div className="flex-1"></div>
+            <div className="text-center">
               <h1 className="text-4xl font-bold mb-2 text-gray-800">Quiz Game</h1>
               {error && <p className="text-sm text-red-600 mt-2">⚠️ {error}</p>}
             </div>
-            <div className="ml-4">
+            <div className="flex-1 flex justify-end">
               <LoginButton />
             </div>
           </div>

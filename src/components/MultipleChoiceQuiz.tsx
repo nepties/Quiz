@@ -3,6 +3,9 @@ import { useQuizStore } from "@/store/quizStore";
 import { MultipleChoiceQuestion, MultipleChoiceAnswer } from "@/types/quiz";
 import { ArrowPathIcon, ChevronLeftIcon, ChevronRightIcon, HomeIcon } from "@heroicons/react/24/solid";
 import QuizStats from "./QuizStats";
+import QuizControls from "./QuizControls";
+import AverageComparison from "./AverageComparison";
+import LoginButton from "./LoginButton";
 import { useAuth } from "@/contexts/AuthContext";
 import { StatsService } from "@/services/statsService";
 
@@ -316,6 +319,7 @@ export default function MultipleChoiceQuiz() {
               {currentQuiz.title}
             </h1>
           </div>
+          <LoginButton />
         </div>
       </div>
 
@@ -323,97 +327,24 @@ export default function MultipleChoiceQuiz() {
       <div className="max-w-4xl mx-auto px-6 py-6">
         {/* Quiz Content */}
         <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-200">
-          {!isGameStarted ? (
-            <div className="mb-12">
-              <div className="flex items-center gap-4">
-                <div className="w-1/2 relative">
-                  <button
-                    onClick={startGame}
-                    className="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-base font-bold h-10"
-                  >
-                    시작하기
-                  </button>
-                </div>
-                <div className="flex-1"></div>
-                <div className="flex items-center space-x-6">
-                  <div className="text-center">
-                    <div className="text-xs text-gray-500">점수</div>
-                    <div className="text-lg font-bold text-gray-800">
-                      0 / {totalQuestions}
-                    </div>
-                  </div>
-                  <div className="text-center relative">
-                    <div className="text-xs text-gray-500">시간</div>
-                    <div className="text-lg font-bold font-mono text-gray-800">
-                      {Math.floor(currentQuiz.timeLimit / 60)
-                        .toString()
-                        .padStart(2, "0")}
-                      :
-                      {(currentQuiz.timeLimit % 60).toString().padStart(2, "0")}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ) : currentSession.isCompleted ? (
-            <div className="mb-12">
-              <div className="flex items-center gap-4">
-                <div className="w-1/2 relative">
-                  <button
-                    onClick={handleRestart}
-                    className="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-base font-bold h-10 flex items-center justify-center gap-2"
-                  >
-                    <ArrowPathIcon className="w-5 h-5" />
-                    다시하기
-                  </button>
-                </div>
-                <div className="flex-1"></div>
-                <div className="flex items-center space-x-6">
-                  <div className="text-center">
-                    <div className="text-xs text-gray-500">점수</div>
-                    <div className="text-lg font-bold text-gray-800">
-                      {currentScore} / {totalQuestions}
-                    </div>
-                  </div>
-                  <div className="text-center relative">
-                    <div className="text-xs text-gray-500">시간</div>
-                    <div className="text-lg font-bold font-mono text-gray-800">
-                      {minutes.toString().padStart(2, "0")}:
-                      {seconds.toString().padStart(2, "0")}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="mb-12">
-              <div className="flex items-center justify-end gap-4">
-                <div className="flex items-center space-x-6">
-                  <div className="text-center">
-                    <div className="text-xs text-gray-500">점수</div>
-                    <div className="text-lg font-bold text-gray-800">
-                      {currentScore} / {totalQuestions}
-                    </div>
-                  </div>
-                  <div className="text-center relative">
-                    <div className="text-xs text-gray-500">시간</div>
-                    <div className="text-lg font-bold font-mono text-gray-800">
-                      {minutes.toString().padStart(2, "0")}:
-                      {seconds.toString().padStart(2, "0")}
-                    </div>
-                    {!currentSession.isCompleted && (
-                      <button
-                        onClick={handleQuizComplete}
-                        className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 text-xs text-red-500 hover:text-red-700 underline whitespace-nowrap"
-                      >
-                        포기하기
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+          <QuizControls
+            isGameStarted={isGameStarted}
+            isCompleted={currentSession.isCompleted}
+            currentScore={currentScore}
+            totalScore={totalQuestions}
+            timeLeft={timeLeft}
+            onStart={startGame}
+            onRestart={handleRestart}
+            onEndQuiz={handleQuizComplete}
+            showEndButton={true}
+          />
+          
+          <AverageComparison
+            quizId={currentQuiz.id}
+            isCompleted={currentSession.isCompleted}
+            currentScore={currentScore}
+            totalScore={totalQuestions}
+          />
 
           {/* Question Content - Always visible when game started */}
           {isGameStarted && (
